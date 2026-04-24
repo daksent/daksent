@@ -2,345 +2,359 @@
 <html lang="sr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DAKSENT | Premium Detailing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>DAKSENT | Nexory Signature</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --primary-red: #ff0000;
-            --deep-black: #050505;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-main: #ffffff;
-            --text-dim: #999999;
-            --safe-area-inset-bottom: env(safe-area-inset-bottom);
+            --red: #FF0000;
+            --black: #000000;
+            --dark-gray: #0D0D0D;
+            --border-color: #1A1A1A;
+            --text-main: #FFFFFF;
+            --text-dim: #777777;
         }
 
-        /* Osnovni Reset za Mobile */
         * {
             margin: 0; padding: 0; box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
             font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--deep-black);
+            background-color: var(--black);
             color: var(--text-main);
             overflow-x: hidden;
-            width: 100%;
-            /* Sprečava skrolovanje "preko" ivica na iOS */
-            position: relative;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .bg-mesh {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 0%, rgba(255, 0, 0, 0.15) 0%, transparent 50%);
-            z-index: -1;
-        }
-
-        /* Container optimizovan za telefon */
-        .main-wrapper {
+        .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 440px;
             margin: 0 auto;
-            padding: 30px 16px calc(40px + var(--safe-area-inset-bottom));
+            padding: 50px 20px;
         }
 
-        /* Header Section */
-        .header { text-align: center; margin-bottom: 30px; }
-        
-        .logo-container {
-            position: relative;
-            width: 95px; height: 95px;
-            margin: 0 auto 12px;
+        /* Header Animacije */
+        .header { 
+            text-align: center; 
+            margin-bottom: 40px; 
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
         }
+        
+        .logo-wrapper {
+            position: relative;
+            width: 100px; height: 100px;
+            margin: 0 auto 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-wrapper:hover { transform: scale(1.05); }
 
         .main-logo {
             width: 100%; height: 100%;
             object-fit: cover;
             border-radius: 50%;
-            border: 2px solid var(--primary-red);
-            padding: 3px;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+            border: 1px solid var(--red);
+            padding: 4px;
         }
 
-        .verified-badge {
-            position: absolute; bottom: 4px; right: 4px;
+        .verified {
+            position: absolute; bottom: 5px; right: 5px;
             background: #0095f6; width: 22px; height: 22px;
-            border-radius: 50%; border: 2px solid var(--deep-black);
-            display: flex; align-items: center; justify-content: center; font-size: 10px;
+            border-radius: 50%;
+            font-size: 10px; display: flex; align-items: center; justify-content: center;
+            border: 2px solid var(--black);
         }
 
         .brand-name {
-            font-size: 24px; letter-spacing: 2px; font-weight: 800;
-            text-transform: uppercase;
+            font-size: 32px; font-weight: 900;
+            letter-spacing: -1px; text-transform: uppercase;
+            margin-bottom: 10px;
         }
 
         .status-pill {
             display: inline-flex; align-items: center;
-            background: rgba(0, 255, 0, 0.1); color: #00ff00;
-            padding: 4px 12px; border-radius: 20px;
-            font-size: 11px; font-weight: 800; margin-top: 10px;
-            letter-spacing: 0.5px;
+            border: 1px solid #00FF00; color: #00FF00;
+            padding: 5px 12px; font-size: 10px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
-        .pulse {
-            width: 6px; height: 6px; background: #00ff00;
-            border-radius: 50%; margin-right: 6px;
+        .pulse-dot {
+            width: 6px; height: 6px; background: #00FF00;
+            border-radius: 50%; margin-right: 8px;
             animation: blink 1.5s infinite;
         }
 
-        /* Cover Section - Optimizovano za Ratio ekrana */
-        .cover-card {
+        /* Hero Image */
+        .cover-section {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards 0.2s;
+        }
+
+        .cover-box {
             position: relative;
-            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
             overflow: hidden;
-            border: 1px solid var(--glass-border);
-            margin-bottom: 20px;
-            aspect-ratio: 16 / 9;
         }
 
-        .cover-img { width: 100%; height: 100%; object-fit: cover; }
+        .cover-img { width: 100%; display: block; transition: transform 0.5s ease; }
+        .cover-box:hover .cover-img { transform: scale(1.03); }
         
-        .cover-overlay {
-            position: absolute; bottom: 0; width: 100%;
-            padding: 12px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            color: var(--primary-red); font-weight: 800; font-size: 10px;
-            letter-spacing: 2px; text-transform: uppercase;
+        .cover-label {
+            position: absolute; top: 0; left: 0;
+            background: var(--red); color: white;
+            padding: 6px 12px; font-weight: 900; font-size: 10px;
+            text-transform: uppercase; letter-spacing: 1px;
+            z-index: 2;
         }
 
-        .motto { text-align: center; font-size: 14px; color: var(--text-dim); margin-bottom: 25px; padding: 0 10px; }
-        .highlight { color: white; font-weight: 600; display: block; margin-top: 4px; }
+        .motto { text-align: left; margin-bottom: 40px; border-left: 3px solid var(--red); padding-left: 15px; }
+        .motto p { font-size: 13px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+        .highlight { color: white; font-weight: 700; display: block; font-size: 18px; margin-top: 5px; }
 
-        /* Links Grid - Mobile First Tap Targets */
-        .links-grid { display: grid; gap: 10px; }
+        /* Navigacija - Dodati efekti klika */
+        .links-grid { 
+            display: grid; gap: 1px; background: var(--border-color); border: 1px solid var(--border-color); 
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards 0.4s;
+        }
         
-        .link-item { text-decoration: none; color: white; }
+        .link-card { 
+            text-decoration: none; color: white; background: var(--black); 
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
         
-        .link-inner {
-            background: var(--card-bg);
-            border: 1px solid var(--glass-border);
-            /* Minimalna visina za lakši klik prstom */
-            min-height: 75px; 
-            padding: 14px 18px;
-            border-radius: 18px;
+        /* Efekat pritiska na dugme */
+        .link-card:active {
+            transform: scale(0.98);
+            background: var(--dark-gray);
+        }
+
+        .link-content {
+            min-height: 85px;
+            padding: 20px;
             display: flex; align-items: center;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: transform 0.2s, background 0.2s;
+            transition: background 0.3s;
         }
 
-        /* Active stanje umesto hover-a (za telefon) */
-        .link-item:active .link-inner {
-            transform: scale(0.97);
-            background: rgba(255, 0, 0, 0.1);
-            border-color: var(--primary-red);
-        }
-
-        .booking-highlight .link-inner {
-            border: 1px solid var(--primary-red);
-            background: linear-gradient(135deg, rgba(255, 0, 0, 0.15), transparent);
+        .link-card:hover .link-content {
+            background: #080808;
         }
 
         .icon-box {
-            width: 44px; height: 44px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 18px; margin-right: 15px; color: var(--primary-red);
-            flex-shrink: 0;
+            width: 40px; font-size: 20px; margin-right: 20px; 
+            display: flex; justify-content: center; color: var(--red);
+            transition: transform 0.3s ease;
         }
 
-        .text-box h3 { font-size: 15px; font-weight: 600; }
-        .text-box span { font-size: 12px; color: var(--text-dim); }
-        .arrow { margin-left: auto; opacity: 0.2; font-size: 12px; }
+        .link-card:hover .icon-box { transform: translateX(3px); }
 
-        /* Modal - Full Screen Mobile Optimization */
+        .text-box h3 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .text-box span { font-size: 11px; color: var(--text-dim); text-transform: uppercase; }
+        .arrow { margin-left: auto; font-size: 12px; color: #333; transition: transform 0.3s ease; }
+        .link-card:hover .arrow { transform: translateX(5px); color: var(--red); }
+
+        /* Modal sa animacijom */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.98);
+            background: rgba(0,0,0,0.96);
             display: none; justify-content: center; align-items: center;
-            z-index: 9999; padding: 15px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            z-index: 9999; padding: 20px;
+            backdrop-filter: blur(5px);
         }
 
-        .modal-content {
-            background: #0a0a0a;
+        .modal-body {
+            background: var(--black);
             width: 100%; max-width: 400px;
-            border-radius: 24px; padding: 25px;
-            border: 1px solid var(--glass-border);
-            position: relative;
+            border: 1px solid var(--border-color);
+            padding: 40px 25px;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .close-modal { background: none; border: none; color: white; font-size: 28px; padding: 5px; cursor: pointer; }
+        .modal-overlay.active { display: flex; }
+        .modal-overlay.active .modal-body { transform: scale(1); opacity: 1; }
 
-        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .input-group { margin-bottom: 14px; }
-        .input-group label { display: block; font-size: 10px; color: var(--text-dim); margin-bottom: 5px; text-transform: uppercase; font-weight: 800; }
+        .modal-header { display: flex; justify-content: space-between; margin-bottom: 30px; }
+        .close-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; transition: color 0.2s; }
+        .close-btn:hover { color: var(--red); }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 10px; color: var(--text-dim); margin-bottom: 8px; text-transform: uppercase; font-weight: 700; }
         
-        /* Form inputs optimizovani za Touch */
-        .input-group input, .input-group select {
-            width: 100%; padding: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px; color: white;
-            font-size: 16px; /* 16px sprečava iOS da automatski zumira input */
-            outline: none;
-            -webkit-appearance: none;
+        .form-group input, .form-group select {
+            width: 100%; padding: 15px;
+            background: var(--dark-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 0; color: white;
+            font-size: 16px; outline: none;
+            transition: border-color 0.3s;
         }
 
-        .submit-btn {
-            width: 100%; padding: 16px;
-            background: var(--primary-red); color: white;
-            border: none; border-radius: 14px;
-            font-weight: 800; font-size: 14px;
-            letter-spacing: 1px; cursor: pointer;
-            margin-top: 5px;
+        .form-group input:focus { border-color: var(--red); }
+
+        .submit-trigger {
+            width: 100%; padding: 18px;
+            background: var(--red); color: white;
+            border: none; font-weight: 900; font-size: 14px;
+            text-transform: uppercase; cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .submit-trigger:active { transform: scale(0.95); opacity: 0.8; }
+
+        /* Nexory Footer */
+        .nexory-footer {
+            margin-top: 80px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards 0.6s;
+        }
+
+        .nexory-footer p { font-size: 9px; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 12px; }
+        .nexory-text {
+            font-size: 22px; font-weight: 900; letter-spacing: 4px;
+            color: #fff; text-decoration: none; display: inline-block;
+            transition: transform 0.3s;
+        }
+        .nexory-text:hover { transform: translateY(-3px); }
+        .nexory-text span { color: var(--red); }
+
+        /* Ključne Animacije */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes blink { 50% { opacity: 0.3; } }
-        
-        .footer { text-align: center; margin-top: 30px; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* Reveal animacije */
-        .animate-up {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
     </style>
 </head>
 <body>
-    <div class="bg-mesh"></div>
-
-    <div class="main-wrapper">
-        <header class="header animate-up">
-            <div class="logo-container">
-                <img src="img/logo.png" alt="Logo" class="main-logo">
-                <div class="verified-badge"><i class="fas fa-check"></i></div>
+    <div class="container">
+        <header class="header">
+            <div class="logo-wrapper">
+                <img src="img/logo.png" alt="Daksent" class="main-logo">
+                <div class="verified"><i class="fas fa-check"></i></div>
             </div>
             <h1 class="brand-name">DAKSENT</h1>
             <div class="status-pill">
-                <span class="pulse"></span> Rezervacije Otvorene
+                <div class="pulse-dot"></div>
+                Dostupni online termini
             </div>
         </header>
 
-        <section class="cover-section animate-up" style="animation-delay: 0.1s;">
-            <div class="cover-card">
-                <img src="img/cover.png" alt="Detailing Work" class="cover-img">
-                <div class="cover-overlay">Nexory Premium Selection</div>
+        <section class="cover-section">
+            <div class="cover-box">
+                <img src="img/cover.png" alt="Premium Detailing" class="cover-img">
+                <div class="cover-label">Premium Usluga</div>
             </div>
             <div class="motto">
-                <p>🧽 Dubinsko pranje i poliranje.</p>
-                <span class="highlight">Vraćamo fabrički sjaj vašem autu.</span>
+                <p>Studio za negu automobila</p>
+                <span class="highlight">Vraćamo fabrički sjaj vašem vozilu.</span>
             </div>
         </section>
 
         <nav class="links-grid">
-            <a href="#" class="link-item booking-highlight animate-up" id="openBooking" style="animation-delay: 0.2s;">
-                <div class="link-inner">
-                    <div class="icon-box"><i class="fas fa-calendar-alt"></i></div>
+            <a href="#" class="link-card" id="openBooking">
+                <div class="link-content">
+                    <div class="icon-box"><i class="fas fa-calendar-check"></i></div>
                     <div class="text-box">
                         <h3>Zakaži Termin</h3>
-                        <span>Najbrži način rezervacije</span>
+                        <span>Brza online rezervacija</span>
                     </div>
-                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                    <i class="fas fa-chevron-right arrow"></i>
                 </div>
             </a>
 
-            <a href="#" class="link-item animate-up" style="animation-delay: 0.3s;">
-                <div class="link-inner">
+            <a href="#" class="link-card">
+                <div class="link-content">
                     <div class="icon-box"><i class="fas fa-images"></i></div>
                     <div class="text-box">
-                        <h3>Slike Radova</h3>
-                        <span>Pogledaj transformacije</span>
+                        <h3>Galerija Radova</h3>
+                        <span>Naše transformacije</span>
                     </div>
-                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                    <i class="fas fa-chevron-right arrow"></i>
                 </div>
             </a>
 
-            <a href="https://instagram.com/daksent.detailing" target="_blank" class="link-item animate-up" style="animation-delay: 0.4s;">
-                <div class="link-inner">
+            <a href="https://instagram.com/daksent.detailing" target="_blank" class="link-card">
+                <div class="link-content">
                     <div class="icon-box"><i class="fab fa-instagram"></i></div>
                     <div class="text-box">
                         <h3>Instagram</h3>
-                        <span>@daksent.detailing</span>
+                        <span>Pratite @daksent.detailing</span>
                     </div>
-                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                    <i class="fas fa-chevron-right arrow"></i>
                 </div>
             </a>
 
-            <a href="mailto:daniloaksentijevic009@gmail.com" class="link-item animate-up" style="animation-delay: 0.5s;">
-                <div class="link-inner">
+            <a href="mailto:daniloaksentijevic009@gmail.com" class="link-card">
+                <div class="link-content">
                     <div class="icon-box"><i class="fas fa-paper-plane"></i></div>
                     <div class="text-box">
-                        <h3>Kontakt Email</h3>
-                        <span>Pitanja i saradnja</span>
+                        <h3>Kontakt</h3>
+                        <span>Pošaljite nam upit</span>
                     </div>
-                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                    <i class="fas fa-chevron-right arrow"></i>
                 </div>
             </a>
         </nav>
 
-        <footer class="footer animate-up" style="animation-delay: 0.6s;">
-            <p>Designed by <strong>NEXORY</strong></p>
+        <footer class="nexory-footer">
+            <p>DIZAJN I IZRADA</p>
+            <a href="https://nexory.agency" target="_blank" class="nexory-text">NEXORY<span>.</span></a>
         </footer>
     </div>
 
     <div class="modal-overlay" id="bookingModal">
-        <div class="modal-content">
+        <div class="modal-body">
             <div class="modal-header">
-                <h2 style="font-size: 18px;">Rezervacija</h2>
-                <button class="close-modal">&times;</button>
+                <h2 style="font-size: 16px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">Rezervacija</h2>
+                <button class="close-btn">&times;</button>
             </div>
-            <div class="modal-body">
-                <form id="bookingForm" action="https://formspree.io/f/daniloaksentijevic009@gmail.com" method="POST">
-                    <div class="input-group">
-                        <label>Ime i Prezime</label>
-                        <input type="text" name="Ime" placeholder="Marko Marković" required>
-                    </div>
-                    
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label>Model</label>
-                            <input type="text" name="Model" placeholder="Audi A4" required>
-                        </div>
-                        <div class="input-group">
-                            <label>Godište</label>
-                            <input type="number" name="Godiste" placeholder="2018" required>
-                        </div>
-                    </div>
+            <form id="bookingForm" action="https://formspree.io/f/daniloaksentijevic009@gmail.com" method="POST">
+                <div class="form-group">
+                    <label>Ime i Prezime</label>
+                    <input type="text" name="Ime" required placeholder="Marko Marković">
+                </div>
+                
+                <div class="form-group">
+                    <label>Vozilo (Model i Godište)</label>
+                    <input type="text" name="Vozilo" required placeholder="npr. BMW M3 2021">
+                </div>
 
-                    <div class="input-group">
-                        <label>Usluga & Cena</label>
-                        <select name="Usluga" required>
-                            <option value="">Izaberi paket...</option>
-                            <option value="Enterijer 599">Enterijer (599 RSD)</option>
-                            <option value="Exterijer 799">Exterijer (799 RSD)</option>
-                            <option value="Farovi 2499">Polimerizacija farova (2499 RSD)</option>
-                            <option value="FULL PAKET 3499">FULL PAKET - SVE TRI (3499 RSD)</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label>Izaberite Usluga</label>
+                    <select name="Usluga" required>
+                        <option value="">Izaberite paket...</option>
+                        <option value="Enterijer">Enterijer (599 RSD)</option>
+                        <option value="Exterijer">Exterijer (799 RSD)</option>
+                        <option value="Farovi">Farovi (2499 RSD)</option>
+                        <option value="FULL">FULL PAKET (3499 RSD)</option>
+                    </select>
+                </div>
 
-                    <div class="input-group">
-                        <label>Datum i Vreme</label>
-                        <input type="datetime-local" name="Vreme" required>
-                    </div>
+                <div class="form-group">
+                    <label>Željeni Datum i Vreme</label>
+                    <input type="datetime-local" name="Vreme" required>
+                </div>
 
-                    <button type="submit" class="submit-btn">POŠALJI DANILU</button>
-                </form>
-            </div>
+                <button type="submit" class="submit-trigger">Potvrdi Rezervaciju</button>
+            </form>
         </div>
     </div>
 
@@ -348,47 +362,30 @@
         document.addEventListener('DOMContentLoaded', () => {
             const modal = document.getElementById('bookingModal');
             const openBtn = document.getElementById('openBooking');
-            const closeBtn = document.querySelector('.close-modal');
-            const form = document.getElementById('bookingForm');
+            const closeBtn = document.querySelector('.close-btn');
 
-            // Modal Logic
-            const openModal = (e) => {
+            openBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                modal.style.display = 'flex';
-                document.body.style.position = 'fixed'; // Fix pozadine na iOS-u
-            };
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
 
             const closeModal = () => {
-                modal.style.display = 'none';
-                document.body.style.position = '';
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
             };
 
-            openBtn.addEventListener('click', openModal);
             closeBtn.addEventListener('click', closeModal);
-            window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+            window.addEventListener('click', (e) => { 
+                if (e.target === modal) closeModal(); 
+            });
 
-            // Form Submit
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const btn = form.querySelector('.submit-btn');
-                btn.innerText = 'SLANJE...';
-                
-                try {
-                    const response = await fetch(form.action, {
-                        method: 'POST',
-                        body: new FormData(form),
-                        headers: { 'Accept': 'application/json' }
-                    });
-                    if (response.ok) {
-                        alert('Rezervacija poslata! Vidimo se.');
-                        form.reset();
-                        closeModal();
-                    }
-                } catch (err) {
-                    alert('Greška pri konekciji.');
-                } finally {
-                    btn.innerText = 'POŠALJI DANILU';
-                }
+            // Suptilna haptika za mobilni (ako podržava)
+            const links = document.querySelectorAll('.link-card, .submit-trigger');
+            links.forEach(link => {
+                link.addEventListener('touchstart', () => {
+                    if (window.navigator.vibrate) window.navigator.vibrate(5);
+                });
             });
         });
     </script>
