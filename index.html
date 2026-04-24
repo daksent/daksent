@@ -66,13 +66,13 @@
             font-size: 32px; font-weight: 900;
             letter-spacing: -1px; text-transform: uppercase;
             margin-bottom: 10px;
-            color: var(--red); /* Crvena boja */
+            color: var(--red);
         }
 
         .status-pill {
             display: inline-flex; align-items: center;
-            background: var(--red); /* Crveni okvir/pozadina */
-            color: #FFFFFF; /* Beli tekst */
+            background: var(--red);
+            color: #FFFFFF;
             padding: 6px 14px; font-size: 10px; font-weight: 800;
             text-transform: uppercase; letter-spacing: 1px;
             border-radius: 2px;
@@ -161,6 +161,18 @@
             padding: 40px 25px;
             transform: translateY(30px); opacity: 0;
             transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        /* Portfolio Modal Style */
+        #portfolioModal .modal-body {
+            max-width: 440px;
+            height: 85vh;
+            overflow-y: auto;
+        }
+        #portfolioGrid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
         }
 
         .modal-overlay.active { display: flex; }
@@ -258,7 +270,7 @@
                 </div>
             </a>
 
-            <a class="link-card">
+            <a class="link-card" id="openPortfolio">
                 <div class="link-content">
                     <div class="icon-box"><i class="fas fa-images"></i></div>
                     <div class="text-box">
@@ -294,7 +306,7 @@
 
         <footer class="nexory-footer">
             <p style="font-size: 9px; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 12px;">DIZAJN I IZRADA</p>
-            <a href="https://nexory.agency" target="_blank" class="nexory-text">NEXORY FLOW<span>.</span></a>
+            <a href="https://www.instagram.com/nexoryflow/" target="_blank" class="nexory-text">NEXORY FLOW<span>.</span></a>
         </footer>
     </div>
 
@@ -315,7 +327,7 @@
                     <input type="text" name="Vozilo" required placeholder="npr. BMW M3 2021">
                 </div>
                 <div class="form-group">
-                    <label>Usluga</label>
+                    <label>Izaberite Paket</label>
                     <select name="Usluga" required>
                         <option value="">Izaberite paket...</option>
                         <option value="Enterijer">Enterijer (599 RSD)</option>
@@ -338,30 +350,71 @@
                 <h2 style="font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">Kontakt Info</h2>
                 <button class="close-btn" onclick="closeAllModals()">&times;</button>
             </div>
-            
             <div class="contact-item">
                 <span class="contact-label">Telefon</span>
                 <span class="contact-value">+381 61 2151214</span>
                 <button class="copy-btn" onclick="copyText('+381612151214', this)">Kopiraj Broj</button>
             </div>
-
             <div class="contact-item">
                 <span class="contact-label">E-mail</span>
                 <span class="contact-value" style="font-size: 13px;">daniloaksentijevic009@gmail.com</span>
                 <button class="copy-btn" onclick="copyText('daniloaksentijevic009@gmail.com', this)">Kopiraj Mail</button>
             </div>
+            <p style="font-size: 10px; color: var(--text-dim); text-align: center; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                <a href="https://www.instagram.com/nexoryflow/" target="_blank" style="text-decoration: none; color: inherit;">Powered by Nexory Flow</a>
+            </p>
+        </div>
+    </div>
 
-            <p style="font-size: 10px; color: var(--text-dim); text-align: center; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px;">Powered by Nexory Flow</p>
+    <div class="modal-overlay" id="portfolioModal">
+        <div class="modal-body">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                <h2 style="font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">Galerija Radova</h2>
+                <button class="close-btn" onclick="closeAllModals()">&times;</button>
+            </div>
+            <div id="portfolioGrid"></div>
         </div>
     </div>
 
     <script>
         const bookingModal = document.getElementById('bookingModal');
         const contactModal = document.getElementById('contactModal');
+        const portfolioModal = document.getElementById('portfolioModal');
+
+        const slike = [
+            "WhatsApp Im222age 2026-04-24 at 20.52.35.jpeg",
+            "WhatsApp Ima2ge 2026-04-24 at 20.52.34.jpeg",
+            "WhatsApp Image 2022-04-24 at 20.51.11.jpeg",
+            "WhatsApp Image 20236-04-24 at 20.52.33.jpeg",
+            "WhatsApp Image 20246-04-24 at 20.52.34.jpeg",
+            "WhatsApp Image 2026-024-24 at 20.52.34.jpeg",
+            "WhatsApp Image 2026-024-24 at 20.52.35.jpeg",
+            "WhatsApp Image 2026-034-24 at 20.51.11.jpeg",
+            "WhatsApp Image 2026-04-224 at 20.52.34.jpeg",
+            "WhatsApp Image 2026-04-24 at 20.51.11 (1).jpeg",
+            "WhatsApp Image 2026-04-24 at 20.51.11.jpeg",
+            "WhatsApp Image 2026-04-24 at 20.51.12.j4peg.jpeg",
+            "WhatsApp Image 2026-04-24 at 20.51.411.jpeg",
+            "WhatsApp Image 2026-04-24 at 220.51.12.jpeg",
+            "WhatsApp Image 2026-204-24 at 20.52.34.jpeg"
+        ];
 
         document.getElementById('openBooking').onclick = (e) => {
             e.preventDefault();
             bookingModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        document.getElementById('openPortfolio').onclick = (e) => {
+            e.preventDefault();
+            const grid = document.getElementById('portfolioGrid');
+            grid.innerHTML = slike.map(s => `
+                <div class="cover-box" style="margin-bottom:15px;">
+                    <img src="img/${s}" class="cover-img" loading="lazy">
+                    <div class="cover-label">Detailing</div>
+                </div>
+            `).join('');
+            portfolioModal.classList.add('active');
             document.body.style.overflow = 'hidden';
         };
 
@@ -374,6 +427,7 @@
         function closeAllModals() {
             bookingModal.classList.remove('active');
             contactModal.classList.remove('active');
+            portfolioModal.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
@@ -394,7 +448,6 @@
             }, 2000);
         }
 
-        // Haptika za premium osećaj
         const interactive = document.querySelectorAll('.link-card, .submit-trigger, .copy-btn');
         interactive.forEach(el => {
             el.addEventListener('touchstart', () => {
