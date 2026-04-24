@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DAKSENT | Premium Detailing</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-red: #ff0000;
+            --deep-black: #050505;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: #999999;
+            --safe-area-inset-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* Osnovni Reset za Mobile */
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--deep-black);
+            color: var(--text-main);
+            overflow-x: hidden;
+            width: 100%;
+            /* Sprečava skrolovanje "preko" ivica na iOS */
+            position: relative;
+        }
+
+        .bg-mesh {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 0, 0, 0.15) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* Container optimizovan za telefon */
+        .main-wrapper {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 30px 16px calc(40px + var(--safe-area-inset-bottom));
+        }
+
+        /* Header Section */
+        .header { text-align: center; margin-bottom: 30px; }
+        
+        .logo-container {
+            position: relative;
+            width: 95px; height: 95px;
+            margin: 0 auto 12px;
+        }
+
+        .main-logo {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--primary-red);
+            padding: 3px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+        }
+
+        .verified-badge {
+            position: absolute; bottom: 4px; right: 4px;
+            background: #0095f6; width: 22px; height: 22px;
+            border-radius: 50%; border: 2px solid var(--deep-black);
+            display: flex; align-items: center; justify-content: center; font-size: 10px;
+        }
+
+        .brand-name {
+            font-size: 24px; letter-spacing: 2px; font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .status-pill {
+            display: inline-flex; align-items: center;
+            background: rgba(0, 255, 0, 0.1); color: #00ff00;
+            padding: 4px 12px; border-radius: 20px;
+            font-size: 11px; font-weight: 800; margin-top: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .pulse {
+            width: 6px; height: 6px; background: #00ff00;
+            border-radius: 50%; margin-right: 6px;
+            animation: blink 1.5s infinite;
+        }
+
+        /* Cover Section - Optimizovano za Ratio ekrana */
+        .cover-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 20px;
+            aspect-ratio: 16 / 9;
+        }
+
+        .cover-img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .cover-overlay {
+            position: absolute; bottom: 0; width: 100%;
+            padding: 12px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            color: var(--primary-red); font-weight: 800; font-size: 10px;
+            letter-spacing: 2px; text-transform: uppercase;
+        }
+
+        .motto { text-align: center; font-size: 14px; color: var(--text-dim); margin-bottom: 25px; padding: 0 10px; }
+        .highlight { color: white; font-weight: 600; display: block; margin-top: 4px; }
+
+        /* Links Grid - Mobile First Tap Targets */
+        .links-grid { display: grid; gap: 10px; }
+        
+        .link-item { text-decoration: none; color: white; }
+        
+        .link-inner {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            /* Minimalna visina za lakši klik prstom */
+            min-height: 75px; 
+            padding: 14px 18px;
+            border-radius: 18px;
+            display: flex; align-items: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        /* Active stanje umesto hover-a (za telefon) */
+        .link-item:active .link-inner {
+            transform: scale(0.97);
+            background: rgba(255, 0, 0, 0.1);
+            border-color: var(--primary-red);
+        }
+
+        .booking-highlight .link-inner {
+            border: 1px solid var(--primary-red);
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.15), transparent);
+        }
+
+        .icon-box {
+            width: 44px; height: 44px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; margin-right: 15px; color: var(--primary-red);
+            flex-shrink: 0;
+        }
+
+        .text-box h3 { font-size: 15px; font-weight: 600; }
+        .text-box span { font-size: 12px; color: var(--text-dim); }
+        .arrow { margin-left: auto; opacity: 0.2; font-size: 12px; }
+
+        /* Modal - Full Screen Mobile Optimization */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.98);
+            display: none; justify-content: center; align-items: center;
+            z-index: 9999; padding: 15px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .modal-content {
+            background: #0a0a0a;
+            width: 100%; max-width: 400px;
+            border-radius: 24px; padding: 25px;
+            border: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .close-modal { background: none; border: none; color: white; font-size: 28px; padding: 5px; cursor: pointer; }
+
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .input-group { margin-bottom: 14px; }
+        .input-group label { display: block; font-size: 10px; color: var(--text-dim); margin-bottom: 5px; text-transform: uppercase; font-weight: 800; }
+        
+        /* Form inputs optimizovani za Touch */
+        .input-group input, .input-group select {
+            width: 100%; padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px; color: white;
+            font-size: 16px; /* 16px sprečava iOS da automatski zumira input */
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .submit-btn {
+            width: 100%; padding: 16px;
+            background: var(--primary-red); color: white;
+            border: none; border-radius: 14px;
+            font-weight: 800; font-size: 14px;
+            letter-spacing: 1px; cursor: pointer;
+            margin-top: 5px;
+        }
+
+        @keyframes blink { 50% { opacity: 0.3; } }
+        
+        .footer { text-align: center; margin-top: 30px; font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Reveal animacije */
+        .animate-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-mesh"></div>
+
+    <div class="main-wrapper">
+        <header class="header animate-up">
+            <div class="logo-container">
+                <img src="img/logo.png" alt="Logo" class="main-logo">
+                <div class="verified-badge"><i class="fas fa-check"></i></div>
+            </div>
+            <h1 class="brand-name">DAKSENT</h1>
+            <div class="status-pill">
+                <span class="pulse"></span> Rezervacije Otvorene
+            </div>
+        </header>
+
+        <section class="cover-section animate-up" style="animation-delay: 0.1s;">
+            <div class="cover-card">
+                <img src="img/cover.png" alt="Detailing Work" class="cover-img">
+                <div class="cover-overlay">Nexory Premium Selection</div>
+            </div>
+            <div class="motto">
+                <p>🧽 Dubinsko pranje i poliranje.</p>
+                <span class="highlight">Vraćamo fabrički sjaj vašem autu.</span>
+            </div>
+        </section>
+
+        <nav class="links-grid">
+            <a href="#" class="link-item booking-highlight animate-up" id="openBooking" style="animation-delay: 0.2s;">
+                <div class="link-inner">
+                    <div class="icon-box"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="text-box">
+                        <h3>Zakaži Termin</h3>
+                        <span>Najbrži način rezervacije</span>
+                    </div>
+                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                </div>
+            </a>
+
+            <a href="#" class="link-item animate-up" style="animation-delay: 0.3s;">
+                <div class="link-inner">
+                    <div class="icon-box"><i class="fas fa-images"></i></div>
+                    <div class="text-box">
+                        <h3>Slike Radova</h3>
+                        <span>Pogledaj transformacije</span>
+                    </div>
+                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                </div>
+            </a>
+
+            <a href="https://instagram.com/daksent.detailing" target="_blank" class="link-item animate-up" style="animation-delay: 0.4s;">
+                <div class="link-inner">
+                    <div class="icon-box"><i class="fab fa-instagram"></i></div>
+                    <div class="text-box">
+                        <h3>Instagram</h3>
+                        <span>@daksent.detailing</span>
+                    </div>
+                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                </div>
+            </a>
+
+            <a href="mailto:daniloaksentijevic009@gmail.com" class="link-item animate-up" style="animation-delay: 0.5s;">
+                <div class="link-inner">
+                    <div class="icon-box"><i class="fas fa-paper-plane"></i></div>
+                    <div class="text-box">
+                        <h3>Kontakt Email</h3>
+                        <span>Pitanja i saradnja</span>
+                    </div>
+                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                </div>
+            </a>
+        </nav>
+
+        <footer class="footer animate-up" style="animation-delay: 0.6s;">
+            <p>Designed by <strong>NEXORY</strong></p>
+        </footer>
+    </div>
+
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="font-size: 18px;">Rezervacija</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="bookingForm" action="https://formspree.io/f/daniloaksentijevic009@gmail.com" method="POST">
+                    <div class="input-group">
+                        <label>Ime i Prezime</label>
+                        <input type="text" name="Ime" placeholder="Marko Marković" required>
+                    </div>
+                    
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Model</label>
+                            <input type="text" name="Model" placeholder="Audi A4" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Godište</label>
+                            <input type="number" name="Godiste" placeholder="2018" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Usluga & Cena</label>
+                        <select name="Usluga" required>
+                            <option value="">Izaberi paket...</option>
+                            <option value="Enterijer 599">Enterijer (599 RSD)</option>
+                            <option value="Exterijer 799">Exterijer (799 RSD)</option>
+                            <option value="Farovi 2499">Polimerizacija farova (2499 RSD)</option>
+                            <option value="FULL PAKET 3499">FULL PAKET - SVE TRI (3499 RSD)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Datum i Vreme</label>
+                        <input type="datetime-local" name="Vreme" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">POŠALJI DANILU</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('bookingModal');
+            const openBtn = document.getElementById('openBooking');
+            const closeBtn = document.querySelector('.close-modal');
+            const form = document.getElementById('bookingForm');
+
+            // Modal Logic
+            const openModal = (e) => {
+                e.preventDefault();
+                modal.style.display = 'flex';
+                document.body.style.position = 'fixed'; // Fix pozadine na iOS-u
+            };
+
+            const closeModal = () => {
+                modal.style.display = 'none';
+                document.body.style.position = '';
+            };
+
+            openBtn.addEventListener('click', openModal);
+            closeBtn.addEventListener('click', closeModal);
+            window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+            // Form Submit
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('.submit-btn');
+                btn.innerText = 'SLANJE...';
+                
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (response.ok) {
+                        alert('Rezervacija poslata! Vidimo se.');
+                        form.reset();
+                        closeModal();
+                    }
+                } catch (err) {
+                    alert('Greška pri konekciji.');
+                } finally {
+                    btn.innerText = 'POŠALJI DANILU';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
