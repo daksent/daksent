@@ -326,10 +326,13 @@
                 <h2 style="font-size: 16px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">Rezervacija</h2>
                 <button class="close-btn">&times;</button>
             </div>
-            <form id="bookingForm" action="https://formspree.io/f/daniloaksentijevic009@gmail.com" method="POST">
+            <form id="bookingForm" action="https://formspree.io/f/xyklodej" method="POST">
+                
+                <input type="hidden" name="_subject" value="Nova rezervacija sa sajta Daksent!">
+
                 <div class="form-group">
                     <label>Ime i Prezime</label>
-                    <input type="text" name="Ime" required placeholder="Marko Marković">
+                    <input type="text" name="Ime klijenta" required placeholder="Marko Marković">
                 </div>
                 
                 <div class="form-group">
@@ -350,12 +353,12 @@
 
                 <div class="form-group">
                     <label>Željeni Datum i Vreme</label>
-                    <input type="datetime-local" name="Vreme" required>
+                    <input type="datetime-local" name="Termin" required>
                 </div>
 
                 <button type="submit" class="submit-trigger">Potvrdi Rezervaciju</button>
             </form>
-        </div>
+            </div>
     </div>
 
     <script>
@@ -380,7 +383,7 @@
                 if (e.target === modal) closeModal(); 
             });
 
-            // Suptilna haptika za mobilni (ako podržava)
+            // Suptilna haptika za mobilni
             const links = document.querySelectorAll('.link-card, .submit-trigger');
             links.forEach(link => {
                 link.addEventListener('touchstart', () => {
