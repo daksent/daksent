@@ -38,7 +38,7 @@
             padding: 50px 20px;
         }
 
-        /* Header Animacije */
+        /* Header */
         .header { 
             text-align: center; 
             margin-bottom: 40px; 
@@ -51,10 +51,7 @@
             position: relative;
             width: 100px; height: 100px;
             margin: 0 auto 20px;
-            transition: transform 0.3s ease;
         }
-        
-        .logo-wrapper:hover { transform: scale(1.05); }
 
         .main-logo {
             width: 100%; height: 100%;
@@ -64,18 +61,11 @@
             padding: 4px;
         }
 
-        .verified {
-            position: absolute; bottom: 5px; right: 5px;
-            background: #0095f6; width: 22px; height: 22px;
-            border-radius: 50%;
-            font-size: 10px; display: flex; align-items: center; justify-content: center;
-            border: 2px solid var(--black);
-        }
-
         .brand-name {
             font-size: 32px; font-weight: 900;
             letter-spacing: -1px; text-transform: uppercase;
             margin-bottom: 10px;
+            color: var(--red); /* Promenjeno u CRVENU boju */
         }
 
         .status-pill {
@@ -91,7 +81,7 @@
             animation: blink 1.5s infinite;
         }
 
-        /* Hero Image */
+        /* Hero */
         .cover-section {
             opacity: 0;
             transform: translateY(20px);
@@ -102,25 +92,22 @@
             position: relative;
             border: 1px solid var(--border-color);
             margin-bottom: 30px;
-            overflow: hidden;
         }
 
-        .cover-img { width: 100%; display: block; transition: transform 0.5s ease; }
-        .cover-box:hover .cover-img { transform: scale(1.03); }
+        .cover-img { width: 100%; display: block; }
         
         .cover-label {
             position: absolute; top: 0; left: 0;
             background: var(--red); color: white;
             padding: 6px 12px; font-weight: 900; font-size: 10px;
             text-transform: uppercase; letter-spacing: 1px;
-            z-index: 2;
         }
 
         .motto { text-align: left; margin-bottom: 40px; border-left: 3px solid var(--red); padding-left: 15px; }
         .motto p { font-size: 13px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
         .highlight { color: white; font-weight: 700; display: block; font-size: 18px; margin-top: 5px; }
 
-        /* Navigacija - Dodati efekti klika */
+        /* Grid */
         .links-grid { 
             display: grid; gap: 1px; background: var(--border-color); border: 1px solid var(--border-color); 
             opacity: 0;
@@ -130,41 +117,25 @@
         .link-card { 
             text-decoration: none; color: white; background: var(--black); 
             transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Efekat pritiska na dugme */
-        .link-card:active {
-            transform: scale(0.98);
-            background: var(--dark-gray);
+            cursor: pointer;
         }
 
         .link-content {
             min-height: 85px;
             padding: 20px;
             display: flex; align-items: center;
-            transition: background 0.3s;
-        }
-
-        .link-card:hover .link-content {
-            background: #080808;
         }
 
         .icon-box {
             width: 40px; font-size: 20px; margin-right: 20px; 
             display: flex; justify-content: center; color: var(--red);
-            transition: transform 0.3s ease;
         }
-
-        .link-card:hover .icon-box { transform: translateX(3px); }
 
         .text-box h3 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
         .text-box span { font-size: 11px; color: var(--text-dim); text-transform: uppercase; }
-        .arrow { margin-left: auto; font-size: 12px; color: #333; transition: transform 0.3s ease; }
-        .link-card:hover .arrow { transform: translateX(5px); color: var(--red); }
+        .arrow { margin-left: auto; font-size: 12px; color: #333; }
 
-        /* Modal sa animacijom */
+        /* Modali */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.96);
@@ -178,67 +149,66 @@
             width: 100%; max-width: 400px;
             border: 1px solid var(--border-color);
             padding: 40px 25px;
-            transform: scale(0.9);
-            opacity: 0;
+            transform: scale(0.9); opacity: 0;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .modal-overlay.active { display: flex; }
         .modal-overlay.active .modal-body { transform: scale(1); opacity: 1; }
 
-        .modal-header { display: flex; justify-content: space-between; margin-bottom: 30px; }
-        .close-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; transition: color 0.2s; }
-        .close-btn:hover { color: var(--red); }
+        .close-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
 
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-size: 10px; color: var(--text-dim); margin-bottom: 8px; text-transform: uppercase; font-weight: 700; }
-        
-        .form-group input, .form-group select {
-            width: 100%; padding: 15px;
+        /* Kontakt Info Stilovi */
+        .contact-item {
             background: var(--dark-gray);
             border: 1px solid var(--border-color);
-            border-radius: 0; color: white;
-            font-size: 16px; outline: none;
-            transition: border-color 0.3s;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
         }
 
-        .form-group input:focus { border-color: var(--red); }
+        .contact-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; font-weight: 900; }
+        .contact-value { font-size: 16px; font-weight: 700; letter-spacing: 0.5px; }
+        
+        .copy-btn {
+            background: var(--red);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: opacity 0.2s;
+        }
+        .copy-btn:active { transform: scale(0.95); }
+
+        /* Forme */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 10px; color: var(--text-dim); margin-bottom: 8px; text-transform: uppercase; font-weight: 700; }
+        .form-group input, .form-group select {
+            width: 100%; padding: 15px; background: var(--dark-gray);
+            border: 1px solid var(--border-color); color: white; outline: none;
+        }
 
         .submit-trigger {
-            width: 100%; padding: 18px;
-            background: var(--red); color: white;
-            border: none; font-weight: 900; font-size: 14px;
-            text-transform: uppercase; cursor: pointer;
-            transition: all 0.2s;
+            width: 100%; padding: 18px; background: var(--red); color: white;
+            border: none; font-weight: 900; text-transform: uppercase; cursor: pointer;
         }
 
-        .submit-trigger:active { transform: scale(0.95); opacity: 0.8; }
-
-        /* Nexory Footer */
+        /* Footer */
         .nexory-footer {
-            margin-top: 80px;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-            padding-top: 30px;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards 0.6s;
+            margin-top: 80px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 30px;
+            opacity: 0; animation: fadeInUp 0.6s ease forwards 0.6s;
         }
-
-        .nexory-footer p { font-size: 9px; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 12px; }
-        .nexory-text {
-            font-size: 22px; font-weight: 900; letter-spacing: 4px;
-            color: #fff; text-decoration: none; display: inline-block;
-            transition: transform 0.3s;
-        }
-        .nexory-text:hover { transform: translateY(-3px); }
+        .nexory-text { font-size: 22px; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: 4px; }
         .nexory-text span { color: var(--red); }
 
-        /* Ključne Animacije */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes blink { 50% { opacity: 0.3; } }
 
     </style>
@@ -269,7 +239,7 @@
         </section>
 
         <nav class="links-grid">
-            <a href="#" class="link-card" id="openBooking">
+            <a class="link-card" id="openBooking">
                 <div class="link-content">
                     <div class="icon-box"><i class="fas fa-calendar-check"></i></div>
                     <div class="text-box">
@@ -280,7 +250,7 @@
                 </div>
             </a>
 
-            <a href="#" class="link-card">
+            <a class="link-card">
                 <div class="link-content">
                     <div class="icon-box"><i class="fas fa-images"></i></div>
                     <div class="text-box">
@@ -302,12 +272,12 @@
                 </div>
             </a>
 
-            <a href="mailto:daniloaksentijevic009@gmail.com" class="link-card">
+            <a class="link-card" id="openContact">
                 <div class="link-content">
                     <div class="icon-box"><i class="fas fa-paper-plane"></i></div>
                     <div class="text-box">
                         <h3>Kontakt</h3>
-                        <span>Pošaljite nam upit</span>
+                        <span>Naše informacije</span>
                     </div>
                     <i class="fas fa-chevron-right arrow"></i>
                 </div>
@@ -315,82 +285,102 @@
         </nav>
 
         <footer class="nexory-footer">
-            <p>DIZAJN I IZRADA</p>
+            <p style="font-size: 9px; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 12px;">DIZAJN I IZRADA</p>
             <a href="https://nexory.agency" target="_blank" class="nexory-text">NEXORY<span>.</span></a>
         </footer>
     </div>
 
     <div class="modal-overlay" id="bookingModal">
         <div class="modal-body">
-            <div class="modal-header">
-                <h2 style="font-size: 16px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">Rezervacija</h2>
-                <button class="close-btn">&times;</button>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                <h2 style="font-size: 16px; font-weight: 900; text-transform: uppercase;">Rezervacija</h2>
+                <button class="close-btn" onclick="closeAllModals()">&times;</button>
             </div>
-            <form id="bookingForm" action="https://formspree.io/f/xyklodej" method="POST">
-                
-                <input type="hidden" name="_subject" value="Nova rezervacija sa sajta Daksent!">
-
+            <form action="https://formspree.io/f/xyklodej" method="POST">
+                <input type="hidden" name="_subject" value="Nova rezervacija - Daksent">
                 <div class="form-group">
                     <label>Ime i Prezime</label>
-                    <input type="text" name="Ime klijenta" required placeholder="Marko Marković">
+                    <input type="text" name="Ime" required placeholder="Marko Marković">
                 </div>
-                
                 <div class="form-group">
-                    <label>Vozilo (Model i Godište)</label>
+                    <label>Vozilo</label>
                     <input type="text" name="Vozilo" required placeholder="npr. BMW M3 2021">
                 </div>
-
                 <div class="form-group">
-                    <label>Izaberite Usluga</label>
+                    <label>Usluga</label>
                     <select name="Usluga" required>
                         <option value="">Izaberite paket...</option>
                         <option value="Enterijer">Enterijer (599 RSD)</option>
                         <option value="Exterijer">Exterijer (799 RSD)</option>
-                        <option value="Farovi">Farovi (2499 RSD)</option>
                         <option value="FULL">FULL PAKET (3499 RSD)</option>
                     </select>
                 </div>
-
                 <div class="form-group">
-                    <label>Željeni Datum i Vreme</label>
+                    <label>Datum i Vreme</label>
                     <input type="datetime-local" name="Termin" required>
                 </div>
-
-                <button type="submit" class="submit-trigger">Potvrdi Rezervaciju</button>
+                <button type="submit" class="submit-trigger">Potvrdi</button>
             </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-body">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                <h2 style="font-size: 16px; font-weight: 900; text-transform: uppercase;">Kontakt Info</h2>
+                <button class="close-btn" onclick="closeAllModals()">&times;</button>
             </div>
+            
+            <div class="contact-item">
+                <span class="contact-label">Telefon</span>
+                <span class="contact-value">+381 61 2151214</span>
+                <button class="copy-btn" onclick="copyText('+381612151214', this)">Kopiraj Broj</button>
+            </div>
+
+            <div class="contact-item">
+                <span class="contact-label">E-mail</span>
+                <span class="contact-value" style="font-size: 13px;">daniloaksentijevic009@gmail.com</span>
+                <button class="copy-btn" onclick="copyText('daniloaksentijevic009@gmail.com', this)">Kopiraj Mail</button>
+            </div>
+
+            <p style="font-size: 10px; color: var(--text-dim); text-align: center; margin-top: 20px; text-transform: uppercase;">Nexory Signature Support</p>
+        </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('bookingModal');
-            const openBtn = document.getElementById('openBooking');
-            const closeBtn = document.querySelector('.close-btn');
+        const bookingModal = document.getElementById('bookingModal');
+        const contactModal = document.getElementById('contactModal');
 
-            openBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
+        document.getElementById('openBooking').onclick = () => {
+            bookingModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
 
-            const closeModal = () => {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            };
+        document.getElementById('openContact').onclick = () => {
+            contactModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
 
-            closeBtn.addEventListener('click', closeModal);
-            window.addEventListener('click', (e) => { 
-                if (e.target === modal) closeModal(); 
-            });
+        function closeAllModals() {
+            bookingModal.classList.remove('active');
+            contactModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
 
-            // Suptilna haptika za mobilni
-            const links = document.querySelectorAll('.link-card, .submit-trigger');
-            links.forEach(link => {
-                link.addEventListener('touchstart', () => {
-                    if (window.navigator.vibrate) window.navigator.vibrate(5);
-                });
-            });
-        });
+        window.onclick = (e) => {
+            if (e.target.classList.contains('modal-overlay')) closeAllModals();
+        };
+
+        function copyText(text, btn) {
+            navigator.clipboard.writeText(text);
+            const originalText = btn.innerText;
+            btn.innerText = 'Kopirano!';
+            btn.style.background = '#00FF00';
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.background = '#FF0000';
+            }, 2000);
+        }
     </script>
 </body>
 </html>
